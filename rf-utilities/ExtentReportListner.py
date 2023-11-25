@@ -23,3 +23,19 @@ def Extent_TestCaseHeader(TestCaseHeader, TestcaseID, TCTag):
     RowCounter = RowCounter+1
     worksheet.write('A'+str(RowCounter), TestcaseID+'-'+TestCaseHeader)
     worksheet.write('B'+str(RowCounter), TCTag)
+
+def Create_ExtentNode(TestCaseNodeDetails):
+    global RowCounter
+    RowCounter = RowCounter + 1
+    node = "node~"+TestCaseNodeDetails
+    print(node)
+    worksheet.write('A'+str(RowCounter),node)
+
+def Extent_TestCaseSteps(TestCaseeSteps, TestCaseStatus, ScreenshotPath):
+    global RowCounter
+    RowCounter = RowCounter + 1
+    worksheet.write('B'+str(RowCounter), TestCaseeSteps)
+    worksheet.write('C'+str(RowCounter), TestCaseStatus)
+    if (ScreenshotPath != "None"):
+        indexOfRelativePath = ScreenshotPath.index("/Screenshots")
+        worksheet.write('D'+str(RowCounter), "."+(ScreenshotPath[indexOfRelativePath:]))
