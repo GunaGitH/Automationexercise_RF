@@ -39,3 +39,21 @@ def Extent_TestCaseSteps(TestCaseeSteps, TestCaseStatus, ScreenshotPath):
     if (ScreenshotPath != "None"):
         indexOfRelativePath = ScreenshotPath.index("/Screenshots")
         worksheet.write('D'+str(RowCounter), "."+(ScreenshotPath[indexOfRelativePath:]))
+
+def Close_Extent_Report():
+    workbook.close()
+
+def createUserDirectory(TestCaseID, screenshotFlag):
+    if(screenshotFlag == "True" or screenshotFlag == "TRUE" or screenshotFlag == "true"):
+        path = os.getcwd()
+        path = path.replace("\\","/")
+        screenshotBasePath = path + "/Reports/Screenshots/" + TestCaseID
+        Today = datetime.now()
+        DateFormat = Today.strftime("%d-%b-%Y")
+        TimeFormat = Today.strftime("%H-%M-%S")
+        print (TimeFormat)
+        FinalPath = (screenshotBasePath+"/"+DateFormat+"/"+TimeFormat)
+        if not os.path.exists(FinalPath):
+            os.makedirs(FinalPath)
+            print (FinalPath)
+            return (FinalPath)
