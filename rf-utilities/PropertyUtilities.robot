@@ -23,7 +23,7 @@ Load Config Properties Data
     Append To Environment Variable    ${WEB_DRIVERS}
     Set Environment Variable    TEST_ENV    ${Load Prop}[Env]
     Set Environment Variable    APP_URL    ${Load Prop}[${Load Prop}[Env]_URL]
-    Set Environment Variable    MAIL_URL    ${Load Prop}[MailURL]
+    #Set Environment Variable    MAIL_URL    ${Load Prop}[MailURL]
 
 
 
