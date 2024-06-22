@@ -1,5 +1,6 @@
 import xlsxwriter
 import os
+import shutil
 from datetime import datetime
 
 RowCounter=0
@@ -57,3 +58,15 @@ def createUserDirectory(TestCaseID, screenshotFlag):
             os.makedirs(FinalPath)
             print (FinalPath)
             return (FinalPath)
+
+def copyExtentFile():
+    current_Directory = os.getcwd
+    current_Directory = current_Directory.replace("\\","/")
+    Today = datetime.now()
+    DateFormat = Today.strftime("%d-%b-%Y")
+    TimeFormat = Today.strftime("%H-%M-%S")
+    source = current_Directory+"/File/"
+    destination = current_Directory+"/Reports/ExtentFile/"
+    shutil.copytree(source,destination,dirs_exist_ok=True)
+    newFileName = "Extent_"+DateFormat+"_"+TimeFormat+"+xlsx"
+    os.rename(destination+"Extent.xlsx",destination+newFileName)

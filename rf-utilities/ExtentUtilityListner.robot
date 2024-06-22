@@ -4,8 +4,9 @@ Library    SeleniumLibrary
 
 *** Keywords ***
 
-Write Extent Test Steps
-    [Arguments]    ${TestStepDescription}    ${TestStepStatus}    ${ScreenshotFlag}
+Write Extent Test Steps On Pass
+    [Arguments]    ${TestStepDescription}    ${ScreenshotFlag}
+    ${TestStepStatus} =    Set Variable    Pass
     ${TestCaseID}=    Set Variable    %{TCID}
     ${PathFinder}=    Create User Directory    ${TestCaseID}    ${screenshotFlag}
     IF    '${PathFinder}' != 'None'
@@ -18,13 +19,17 @@ Write Extent Test Steps
     END
 
 Write Extent Test Steps On Fail
-    [Arguments]    ${TestStepDescription}    ${TestCaseID}    ${TestStepStatus}    ${ScreenshotFlag}
+    [Arguments]    ${TestStepDescription}    ${ScreenshotFlag}
+    ${TestStepStatus} =    Set Variable    Fail
+    ${TestCaseID}=    Set Variable    %{TCID}
     ${PathFinder}=    Create User Directory    ${TestCaseID}    ${screenshotFlag}
     IF    '${PathFinder}' != 'None'
          ${TestStepsFileName}=    Set Variable    FailedStep.jpg
          Sleep    1
          SeleniumLibrary.Capture Page Screenshot    ${PathFinder}/${TestStepsFileName}
+         #Fail    ${TestStepDescription}
          Extent TestCaseSteps    ${TestStepDescription}    ${TestStepStatus}    ${PathFinder}/${TestStepsFileName}
     ELSE
+        #Fail    ${TestStepDescription}
         Extent TestCaseSteps    ${TestStepDescription}    ${TestStepStatus}    None
     END

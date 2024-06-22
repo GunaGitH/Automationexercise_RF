@@ -24,6 +24,7 @@ Load Config Properties Data
     Set Environment Variable    TEST_ENV    ${Load Prop}[Env]
     Set Environment Variable    APP_URL    ${Load Prop}[${Load Prop}[Env]_URL]
     #Set Environment Variable    MAIL_URL    ${Load Prop}[MailURL]
+    Set Environment Variable    TEST_DATA_FILE    TestData.xlsx
 
 
 
@@ -47,13 +48,13 @@ Load Config Properties Data
 
 
     Log To Console    App Url ->    APP_URL
-    IF    "${Load_Prop}[Env]" == "Prod" or "${Load_Prop}[Env]" == "PROD" or "${Load_Prop}[Env]" == "Production"
-        Set Environment Variable    TEST_TYPE    'PRODUCTION'
-        Set Environment Variable    TEST_DATA_FILE    TestDataSmoke_PROD.xlsx
-    ELSE
-        Set Environment Variable    TEST_TYPE    'REGRESSION'
-        Set Environment Variable    TEST_DATA_FILE    TestDataRegression.xlsx
-    END
+#    IF    "${Load_Prop}[Env]" == "Prod" or "${Load_Prop}[Env]" == "PROD" or "${Load_Prop}[Env]" == "Production"
+#        Set Environment Variable    TEST_TYPE    'PRODUCTION'
+#        Set Environment Variable    TEST_DATA_FILE    TestDataSmoke_PROD.xlsx
+#    ELSE
+#        Set Environment Variable    TEST_TYPE    'REGRESSION'
+#        Set Environment Variable    TEST_DATA_FILE    TestDataRegression.xlsx
+#    END
 
     [Return]    &{Load Prop}
 

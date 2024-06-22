@@ -26,10 +26,13 @@ ${overallStatus}=    False
     [Tags]    Smoke    01
     Log To Console    OK
     Log To Console    ${EXECDIR}
-    Set Environment Variable    TCID    01
-    SeleniumCommonUtils.Launch Application
+    Set Environment Variable    TCID    G01
+    SeleniumCommonUtils.Initial Test Set Up    ${SheetName}    G01
+    #SeleniumCommonUtils.Launch Application
     RegistrationPOM.Verify that home page is visible successfully
     RegistrationPOM.Click on 'Signup / Login' button
-    Sleep    10s
+    RegistrationPOM.Verify 'New User Signup!'
+    Log To Console    Guna
+    #Sleep    10s
 
 
