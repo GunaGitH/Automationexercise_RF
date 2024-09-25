@@ -6,9 +6,9 @@ Library    ../rf-utilities/ReadConfig_Properties.py
 Resource    ../DriverUtils/SeleniumCommonUtils.robot
 
 *** Variables ***
-${homePageBanner}    //section[@id='sliderS']
+${homePageBanner}    //section[@id='slider']
 ${loginBtn}    //a[contains(text(),'Signup / Login')]
-${signUpLab}    //h5[contains(text(),'New User Signup!')]
+${signUpLab}    //h2[contains(text(),'New User Signup!')]
 
 *** Keywords ***
 Verify that home page is visible successfully
