@@ -9,6 +9,7 @@ Resource    ../DriverUtils/SeleniumCommonUtils.robot
 ${homePageBanner}    //section[@id='slider']
 ${loginBtn}    //a[contains(text(),'Signup / Login')]
 ${signUpLab}    //h2[contains(text(),'New User Signup!')]
+${sighUpName}    //input[@data-qa='signup-name']
 
 *** Keywords ***
 Verify that home page is visible successfully
@@ -26,5 +27,13 @@ Verify 'New User Signup!'
     ${status} =    SeleniumCommonUtils.Page Should Contain Element    ${signUpLab}    Sign Up Lab
 
 Enter name and email address
-
+    [Arguments]    ${name}
+    Create ExtentNode    Enter name and email address
+    ${mousOverStatus} =    SeleniumCommonUtils.Mouse Over    ${sighUpName}    SignUpName
+    IF    '${mousOverStatus}' == 'False'
+        Write Extent Test Steps On Fail    Page does not contain Sign Up Name    True
+    ELSE
+        ${sendKeyStatus} =    SeleniumCommonUtils.Send Keys    ${name}    ${sighUpName}    SignUpName
+        SeleniumCommonUtils.Check Status With Fail    ${sendKeyStatus}    SignUpName Value    True
+    END
 

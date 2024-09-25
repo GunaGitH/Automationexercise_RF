@@ -67,3 +67,27 @@ Click Element
         SeleniumLibrary.Capture Element Screenshot    ${Element}
         ${clickStatus} =    Run Keyword And Return Status    SeleniumLibrary.Click Element    ${Element}
     END
+
+Mouse Over
+    [Arguments]    ${Element}    ${ElementName}
+    ${status} =    Run Keyword And Return Status    SeleniumLibrary.Mouse Over    ${Element}
+    [Return]    ${status}
+
+Send Keys
+    [Arguments]    ${value}    ${Element}    ${ElementName}
+    ${clearStatus} =    SeleniumCommonUtils.Clear Text    ${Element}    ${ElementName}
+    ${sendKeyStatus} =    Run Keyword And Return Status    SeleniumLibrary.Input Text    ${Element}    ${value}
+    [Return]    ${sendKeyStatus}
+
+Clear Text
+    [Arguments]    ${Element}    ${ElementName}
+    ${clearStatus} =    Run Keyword And Return Status    SeleniumLibrary.Clear Element Text    ${Element}
+    [Return]    ${clearStatusc}
+
+Check Status With Fail
+    [Arguments]    ${status}    ${statusDesc}    ${ScreenshotFlag}
+    IF    '${status}' == 'True'
+        Write Extent Test Steps On Pass    ${statusDesc} : ${status}    ${ScreenshotFlag}
+    ELSE
+        Write Extent Test Steps On Fail    ${statusDesc} : ${status}    ${ScreenshotFlag}
+    END
