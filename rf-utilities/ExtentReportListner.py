@@ -43,6 +43,7 @@ def Extent_TestCaseSteps(TestCaseeSteps, TestCaseStatus, ScreenshotPath):
 
 def Close_Extent_Report():
     workbook.close()
+    copyExtentFile()
 
 def createUserDirectory(TestCaseID, screenshotFlag):
     if(screenshotFlag == "True" or screenshotFlag == "TRUE" or screenshotFlag == "true"):

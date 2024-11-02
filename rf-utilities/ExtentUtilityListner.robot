@@ -49,3 +49,19 @@ Write Extent Test Steps On Warning
         #Fail    ${TestStepDescription}
         Extent TestCaseSteps    ${TestStepDescription}    ${TestStepStatus}    None
     END
+
+Write Extent Test Steps On Info
+    [Arguments]    ${TestStepDescription}    ${ScreenshotFlag}    ${Element}
+    ${TestStepStatus} =    Set Variable    Warning
+    ${TestCaseID}=    Set Variable    %{TCID}
+    ${PathFinder}=    Create User Directory    ${TestCaseID}    ${screenshotFlag}
+    IF    '${PathFinder}' != 'None'
+         ${TestStepsFileName}=    Set Variable    FailedStep.jpg
+         Sleep    1
+         SeleniumLibrary.Capture Element Screenshot    ${Element}    ${PathFinder}/${TestStepsFileName}
+         #Fail    ${TestStepDescription}
+         Extent TestCaseSteps    ${TestStepDescription}    ${TestStepStatus}    ${PathFinder}/${TestStepsFileName}
+    ELSE
+        #Fail    ${TestStepDescription}
+        Extent TestCaseSteps    ${TestStepDescription}    ${TestStepStatus}    None
+    END
