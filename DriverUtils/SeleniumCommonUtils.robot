@@ -23,14 +23,17 @@ Initial Test Set Up
     Launch Application
 
 Launch Application
+    Create ExtentNode    Launch Application
     SeleniumLibrary.Open Browser    %{APP_URL}    %{BROWSER_TYPE}    options=add_argument("--ignore-certificate-error")
-    SeleniumLibrary.Maximize Browser Window
+    ${status} =    Run Keyword And Return Status    SeleniumLibrary.Maximize Browser Window
+    Check Status With Fail    ${status}    Launched Application : %{APP_URL}    True
 
 Close Applications
     [Documentation]  Close Application
     Close Browser
     Log To Console    Dir: ${EXECDIR}
     Sleep    1s
+    Close Extent Report
 
 Page Should Contain Element
     [Documentation]    Validate Element Visibility
@@ -82,7 +85,7 @@ Send Keys
 Clear Text
     [Arguments]    ${Element}    ${ElementName}
     ${clearStatus} =    Run Keyword And Return Status    SeleniumLibrary.Clear Element Text    ${Element}
-    [Return]    ${clearStatusc}
+    [Return]    ${clearStatus}
 
 Check Status With Fail
     [Arguments]    ${status}    ${statusDesc}    ${ScreenshotFlag}

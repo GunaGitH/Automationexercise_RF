@@ -19,20 +19,16 @@ ${SheetName}    Registration
 ${TestExecutionStatus}    Test ExecutionFail
 ${tableHeader}    id:header1
 ${overallStatus}=    False
+${APP_URL}    https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fcontacts.google.com%2F&followup=https%3A%2F%2Fcontacts.google.com%2F&ifkv=AdBytiPz9TIL21QQPxB2F77BBseGYP4Fo6ie7YcKyrbWrCNg1mlYy-1VxyIPvVHeVOo5REieUSF9&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-633637472%3A1751503644093265
 
 *** Test Cases ***
 01_Register User
     [Documentation]    Register User
-    [Tags]    Smoke    G01
-    Log To Console    OK
+    [Tags]    Smoke    01
     Log To Console    ${EXECDIR}
     Set Environment Variable    TCID    G01
-    SeleniumCommonUtils.Initial Test Set Up    ${SheetName}    G01
-    #SeleniumCommonUtils.Launch Application
-    RegistrationPOM.Verify that home page is visible successfully
-    RegistrationPOM.Click on 'Signup / Login' button
-    RegistrationPOM.Verify 'New User Signup!'
-    Log To Console    Guna
-    #Sleep    10s
-
-
+    SeleniumLibrary.Open Browser    ${APP_URL}    chrome    options=add_argument("--ignore-certificate-error")
+    SeleniumLibrary.Maximize Browser Window
+    SeleniumCommonUtils.Send Keys    guna.asokan@gmail.com    //input[@id='identifierId']    UserName
+    SeleniumCommonUtils.Click Element    //span[text()='Next']    $ElementName
+    Sleep    5s
