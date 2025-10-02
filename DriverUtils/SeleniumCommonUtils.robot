@@ -102,3 +102,24 @@ Check Status With Warning
     ELSE
         Write Extent Test Steps On Warning    ${statusDesc} : ${status}    ${ScreenshotFlag}
     END
+
+Launch Application for Download options
+    [Documentation]    Launch Application for Download options
+    &{prop} =    Load Config Properties Data
+    Set Global Variable    &{prop}
+    ${now} =    Get Time    epoch
+    ${download directory}    Join Path    ${OUTPUT DIR}    downloads
+    Create Directory    ${download directory}
+    Log    outputDir->${OUTPUT DIR}
+    Log    downloadDir->${download directory}
+    ${chromeOptions} =    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    ${prefs}    Create Dictionary
+    ...    download.default_directory=${download directory}
+    Set Global Variable    ${download directory}
+    ${Initial-Files-Count} =    Get File Count In Directory
+
+Get File Count In Directory
+    ${directory} =    Set Variable    ${download directory}
+    ${files} =    List Files In Directory    ${directory}
+    ${file_count} =    Get Length    ${files}
+    [Return]    ${file_count}
